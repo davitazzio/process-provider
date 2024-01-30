@@ -1,7 +1,18 @@
-# provider-template
+# Process-provider: modifica al template
 
-`provider-template` is a minimal [Crossplane](https://crossplane.io/) Provider
-that is meant to be used as a template for implementing new Providers. It comes
+Il manifest `examples/dummypod/ngix-server-depl.yaml` dichiara il pod "ricevente", crea un servizio e lo associa a una porta 
+e infine crea un tipo `Process` che comunica con il pod appena creato. 
+
+Nel manifest `examples/provider/config.yaml` viene definito il `ProviderConfig` che serve per associare i tipi `Process` al `process-provider`
+
+Nella cartella `packages/crds` sono definiti i tipi come `CustomResourceDefinition`
+
+Il file `packages/crossplane.yaml` contiene la configurazione per il provider `process-provider`
+
+# provider-processprovider
+
+`provider-processprovider` is a minimal [Crossplane](https://crossplane.io/) Provider
+that is meant to be used as a processprovider for implementing new Providers. It comes
 with the following features that are meant to be refactored:
 
 - A `ProviderConfig` type that only points to a credentials `Secret`.
@@ -11,7 +22,7 @@ with the following features that are meant to be refactored:
 
 ## Developing
 
-1. Use this repository as a template to create a new one.
+1. Use this repository as a processprovider to create a new one.
 1. Run `make submodules` to initialize the "build" Make submodule we use for CI/CD.
 1. Rename the provider by running the following command:
 ```shell
@@ -36,3 +47,4 @@ guide may also be of use.
 
 [CONTRIBUTING.md]: https://github.com/crossplane/crossplane/blob/master/CONTRIBUTING.md
 [provider-dev]: https://github.com/crossplane/crossplane/blob/master/contributing/guide-provider-development.md
+

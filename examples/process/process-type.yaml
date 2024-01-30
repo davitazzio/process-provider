@@ -1,0 +1,10 @@
+apiVersion: process.processprovider.crossplane.io/v1alpha1
+kind: Process
+metadata:
+  name: test-provider
+spec:
+  forProvider:
+    nodeAddress: "hello-ngix"
+    nodePort: "8080"
+  providerConfigRef:
+    name: processprovider-config
