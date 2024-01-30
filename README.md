@@ -7,7 +7,9 @@ Nel manifest [examples/provider/config.yaml] viene definito il `ProviderConfig` 
 
 Nella cartella [packages/crds] sono definiti i tipi come `CustomResourceDefinition`
 
-Il file [packages/crossplane.yaml] contiene la configurazione per il provider `process-provider`
+Il file [packages/crossplane.yaml] contiene la configurazione per il provider `process-provider` necessario per il `make build`.
+
+Il file [package/manifest-kubernetes.yaml] contiene la configurazione per il provider `process-provider` necessario il deployment su kubernetes.
 
 # provider-processprovider
 
@@ -49,6 +51,7 @@ guide may also be of use.
 [examples/provider/config.yaml]: https://github.com/davitazzio/process-provider/blob/main/examples/provider/config.yaml
 [packages/crds]: https://github.com/davitazzio/process-provider/tree/main/package/crds
 [packages/crossplane.yaml]: https://github.com/davitazzio/process-provider/blob/main/package/crossplane.yaml
+[package/manifest-kubernetes.yaml]: https://github.com/davitazzio/process-provider/blob/main/package/manifest-kubernetes.yaml
 [CONTRIBUTING.md]: https://github.com/crossplane/crossplane/blob/master/CONTRIBUTING.md
 [provider-dev]: https://github.com/crossplane/crossplane/blob/master/contributing/guide-provider-development.md
 
