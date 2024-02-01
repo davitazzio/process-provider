@@ -6,5 +6,6 @@ spec:
   forProvider:
     nodeAddress: "hello-ngix"
     nodePort: "8080"
+    service: ""
   providerConfigRef:
     name: processprovider-config
