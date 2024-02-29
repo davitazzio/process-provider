@@ -11,12 +11,10 @@ type ProcessServiceList struct {
 }
 
 func (pl *ProcessServiceList) GetItems() []*ProcessService {
-
 	return pl.items
 }
 
 func (pl *ProcessServiceList) AddService(service *ProcessService) {
-
 	pl.items = append(pl.items, service)
 
 }
@@ -25,6 +23,7 @@ var instances *ProcessServiceList
 
 func GetInstance(processName string) *ProcessService {
 
+	// Pattern singleton for each "process" created
 	if instances == nil {
 		instances = &ProcessServiceList{}
 	}
