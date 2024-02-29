@@ -21,7 +21,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/pkg/errors"
@@ -50,22 +49,11 @@ const (
 	errTrackPCUsage = "cannot track ProviderConfig usage"
 	errGetPC        = "cannot get ProviderConfig"
 	errGetCreds     = "cannot get credentials"
-
-	errNewClient = "cannot create new Service"
+	errNewClient    = "cannot create new Service"
 )
-
-// A ProcessService does nothing.
-
-// func (p *ProcessService) UpdateExecuted(condition bool) {
-// 	p.Executed = condition
-// }
-// func (p *ProcessService) GetExecuted() bool {
-// 	return p.Executed
-// }
 
 var (
 	newProcessService = func(_ []byte, processName string) (*processservice.ProcessService, error) {
-
 		return processservice.GetInstance(processName), nil
 	}
 )
@@ -187,22 +175,14 @@ func (c *external) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 	if !ok {
 		return managed.ExternalCreation{}, errors.New(errNotProcess)
 	}
-	var temp string
-	if *&cr.Spec.ForProvider.Service == nil {
-		temp = fmt.Sprintf("MAMMA STO CREANDO LA RISORSA %s, CHE HA COME NODEADDRESS %s", cr.Name, cr.Spec.ForProvider.NodeAddress)
-	} else {
-		temp = fmt.Sprintf("MAMMA STO CREANDO LA RISORSA %s, CHE HA COME NODEADDRESS %s e come RESOURCE TO DOWNLOAD %s", cr.Name, cr.Spec.ForProvider.NodeAddress, *cr.Spec.ForProvider.Service)
-	}
 
-	c.logger.Debug(temp)
+	c.logger.Debug(fmt.Sprintf("Creating resource %s with parameter 'node_address' %s.", cr.Name, cr.Spec.ForProvider.NodeAddress))
+
+	// an example of resource creatino connecting to an HTTP server
 	sendHTTPReq(cr.Spec.ForProvider.NodeAddress, cr.Spec.ForProvider.NodePort, cr.Spec.ForProvider.Service, c.logger)
+
 	// newCondition := true
-	c.service.UpdateExecuted(true)
-	c.logger.Debug(strconv.FormatBool(c.service.GetExecuted()))
-	c.logger.Debug(strconv.FormatBool(c.service.Executed))
-	cr.SetConditions(v1.Available())
 	mg.SetConditions(v1.Available())
-	mg.SetConditions(v1.ReconcileSuccess())
 
 	meta.SetExternalCreateSucceeded(mg, time.Now())
 	return managed.ExternalCreation{
@@ -218,7 +198,7 @@ func (c *external) Update(ctx context.Context, mg resource.Managed) (managed.Ext
 		return managed.ExternalUpdate{}, errors.New(errNotProcess)
 	}
 
-	fmt.Printf("Updating: %+v", cr)
+	c.logger.Debug(fmt.Sprintf("Updating: %+v", cr))
 
 	return managed.ExternalUpdate{
 		// Optionally return any details that may be required to connect to the
@@ -228,26 +208,26 @@ func (c *external) Update(ctx context.Context, mg resource.Managed) (managed.Ext
 }
 
 func (c *external) Delete(ctx context.Context, mg resource.Managed) error {
-	_, ok := mg.(*v1alpha1.Process)
+	cr, ok := mg.(*v1alpha1.Process)
 	if !ok {
 		return errors.New(errNotProcess)
 	}
 	processservice.DeleteProcessService(mg.GetName())
 
-	c.logger.Debug("CANCELLO LA RISORSA")
+	c.logger.Debug(fmt.Sprintf("Deleting resource: %+v", cr))
 
 	return nil
 }
 
 func sendHTTPReq(nodeAddress string, nodePort string, service *string, logger logging.Logger) {
-	logger.Debug("Invio la richiesta a")
 
 	address := "http://" + nodeAddress + ":" + nodePort + "/" + *service
 
-	logger.Debug(address)
+	logger.Debug(fmt.Sprintf("Sending HTTP request to node %s", address))
+
 	resp, err := http.Get(address)
 	if err != nil {
-		logger.Debug("ERRORE NELLA RICHIESTA")
+		logger.Debug("Error decoding request.")
 		logger.Debug(err.Error())
 	}
 	defer func() {
@@ -258,114 +238,8 @@ func sendHTTPReq(nodeAddress string, nodePort string, service *string, logger lo
 	}()
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		logger.Debug("Errore nella lettura del body")
+		logger.Debug("Error reading response.")
 		logger.Debug(err.Error())
 	}
 	logger.Debug(string(body))
 }
-
-// func connectSSH(hostAddress string, logger logging.Logger) {
-
-// 	// v, err := os.ReadFile("/home/datavix/.ssh/id_rsa") //read the content of file
-// 	// if err != nil {
-// 	// 	fmt.Println(err)
-// 	// 	return
-// 	// }
-// 	// v_string :='-----BEGIN OPENSSH PRIVATE KEY-----
-// 	// b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABlwAAAAdzc2gtcn
-// 	// NhAAAAAwEAAQAAAYEAxTT4dr/mJ95/tfaKZNyVEmYb7uuvor82QEk13p66bFANkUEtwwJt
-// 	// SZ/Bq3wGp/oPWMFUsHk/v6v0dyvBrB93ztVsghFqCIDG3RbQPnUOljivcbDy8VuS1PfHFe
-// 	// UQqD1dYY1l2iEOv0+2kuMbkAFQjtE09Dd3u98s3aKWlGhuHqchJqweFrf6OJ7dtMyDhERS
-// 	// bp4x7thwkhWDJSfbHxapv4p9Ltdns1L1nQITUplR7aSfJylWtLVT0zS2+emiCjAuUcK0pR
-// 	// gI5buvUUsCean6jinQ09dao7qzp4NNQMpvmxBYupF9ouM5+4qr5isxsavy7bW8MJyz0zpf
-// 	// ax71kqfwrvb60Do/oYoKRkSI9M0AY9GWAkaAG4g9roQ8oPMqq0l+IfOv2Oc8F+6r2xWK2p
-// 	// ZSk6TYEp0b3Z0KEWDvkJyNRrat1MwSWBupiVnsf4Fg0CoNOrtxmjK+weSN9LITVhUnhj5U
-// 	// MktQHaZIvtR1RISP6jiriKqtfkVswGIyiXl5+XrVAAAFmJo2zWmaNs1pAAAAB3NzaC1yc2
-// 	// EAAAGBAMU0+Ha/5ifef7X2imTclRJmG+7rr6K/NkBJNd6eumxQDZFBLcMCbUmfwat8Bqf6
-// 	// D1jBVLB5P7+r9Hcrwawfd87VbIIRagiAxt0W0D51DpY4r3Gw8vFbktT3xxXlEKg9XWGNZd
-// 	// ohDr9PtpLjG5ABUI7RNPQ3d7vfLN2ilpRobh6nISasHha3+jie3bTMg4REUm6eMe7YcJIV
-// 	// gyUn2x8Wqb+KfS7XZ7NS9Z0CE1KZUe2knycpVrS1U9M0tvnpogowLlHCtKUYCOW7r1FLAn
-// 	// mp+o4p0NPXWqO6s6eDTUDKb5sQWLqRfaLjOfuKq+YrMbGr8u21vDCcs9M6X2se9ZKn8K72
-// 	// +tA6P6GKCkZEiPTNAGPRlgJGgBuIPa6EPKDzKqtJfiHzr9jnPBfuq9sVitqWUpOk2BKdG9
-// 	// 2dChFg75CcjUa2rdTMElgbqYlZ7H+BYNAqDTq7cZoyvsHkjfSyE1YVJ4Y+VDJLUB2mSL7U
-// 	// dUSEj+o4q4iqrX5FbMBiMol5efl61QAAAAMBAAEAAAGALkFJKPNETOQtgNThq5woc/8SvL
-// 	// S3xrzCQQxa8As7bzXMpN4MmYGreBoaXzpRRluK93arQlRCLVcsGTqga9qaq58YGx7yB6oK
-// 	// 2ucjs46ZvAbyMcC/Dvj7ZOv0HJDUmh2AlmXHtsTLtHhCOsw9lgaU6lasLL8I3L5RQ/ADkS
-// 	// 44bASn7C3xRcNj052Bo4tXqrGqwwrka+EE8GLO1qt1RCK48HYPfCnmhyNlfCz1MsnG825K
-// 	// LTGPRoYEchTaeR5BVVHs1eFzTSfry+3f9m1AsNaG+LPsXUJ9LukZqvkfcTOqW+MA3TewB6
-// 	// SHdBNKBJr3Xenhn6LueDmfuuu8UY7c/wvJbIbGW7ryOAVvjejUJZXAjkyKm8e7ViGql1Pj
-// 	// jGXssw/bhKcSFpL1iWD9VZlBeHmSAXPfwdTmlrP6u0oDY3R0rb6PwCqs5Jshbdla2zcoeW
-// 	// qVW4tPaK11BwR1M3slelsMQo3l+guk3jccLbdf592Ellwb5T1hUIztSCt8mgpi0dLRAAAA
-// 	// wQCKof8tfs7755yEFdXe1nuKC5M0Fn1n6dKM6pyPwtfd6poeHb5uae0bXhOaLs0n1Tn13I
-// 	// wcSkir6EUwSnmV7xbrZxThDCn68vbX7qnqFwnpK4WMeZdjGkmI/k5tFCZxXAzElhS2/7KP
-// 	// c2or9Pzqj2Qygaox1ztHPwM6qz+6Dsd5Ur8BPIjs1AoH+u4v3IH/d1oWR6wemKd+qIdE51
-// 	// hSX0taYm+KTf3sEr54GE5aupN9EtIYJ0x5KsNixueN8o6WEMgAAADBANghtnSAZeM8VL3U
-// 	// s+UkgjKuq3TQ85qAJab9Euge6fmAbgRL/y0JAyPgj+k7gVMQ8r2X0RZcjnyEhsbGruan6c
-// 	// k6I7SvHuZ+712iWPEXpXFXBPgB3LAy/fUO55UrlwZGaJqdsIJsLnP65pxV/bLH0m4M/NTa
-// 	// VLOl1wESjxsorpdJknE/DR6xpdv2ejDTA8/Dhk1U/FPyuFLTUKAwmyVTUiNR1O7hrUwkKl
-// 	// XJNQze4Yk74Q/zxL1EBYCVoymRntjdsQAAAMEA6ZWU+yRa2t3ZmUzHRyoWzIm4oWflQPCR
-// 	// fWURM5vroJCzFp80Xq+Q6umSXJrjOn3QaWWqd06W97vKuQSEtZJHL0cwxbIbcp32XC9CA8
-// 	// BxxlLMbDM1RLABRKXkmRwDwlBNiA8TqmpqBtFdNOEZfXlIYoxut3gi69IDKIq4JoyFBXb3
-// 	// WJGevEjRfsT23gVuV1qV9rYNWqdEinreHL8sSCWtEupsVkrBxJS+anNIH73jcLfOW8x2by
-// 	// feTFbTI5Xat0RlAAAAHGRhdGF2aXhAZHRhenppb2xpLWt1YmVybmV0ZXMBAgMEBQY=
-// 	// -----END OPENSSH PRIVATE KEY-----'
-// 	// logger.Debug("CONVERTO LA CHIAVE IN BYTE")
-
-// 	// v := []byte(v_string)
-// 	// signer, err := ssh.ParsePrivateKey(v)
-// 	// if err != nil {
-// 	// 	logger.Debug("errore nel parsing della chiave")
-// 	// 	logger.Debug(err.Error())
-// 	// }
-
-// 	logger.Debug("ORA MI COLLEGO AL CLIENT")
-// 	config := &ssh.ClientConfig{
-// 		User: "datavix",
-// 		Auth: []ssh.AuthMethod{
-// 			ssh.Password("datavix"),
-// 		},
-// 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
-// 	}
-
-// 	logger.Debug("ORA FACCIO DIAL")
-
-// 	client, err := ssh.Dial("tcp", hostAddress+":22", config)
-// 	if err != nil {
-// 		logger.Debug("Failed to dial: ")
-// 		logger.Debug(err.Error())
-// 		// os.Exit(-1)
-// 	}
-// 	defer client.Close()
-
-// 	session, _ := client.NewSession()
-// 	defer session.Close()
-
-// 	// file, _ := os.Open("prova2.txt")
-// 	// defer file.Close()
-// 	// stat, _ := file.Stat()
-
-// 	// wg := sync.WaitGroup{}
-// 	// wg.Add(1)
-
-// 	// go func() {
-// 	// 	hostIn, err := session.StdinPipe()
-// 	// 	print(err.Error())
-// 	// 	defer hostIn.Close()
-// 	// 	_, err = fmt.Fprintf(hostIn, "C0664 %d %s\n", stat.Size(), "filecopyname")
-// 	// 	print(err.Error())
-// 	// 	io.Copy(hostIn, file)
-// 	// 	fmt.Fprint(hostIn, "\x00")
-// 	// 	wg.Done()
-// 	// }()
-
-// 	// session.Shell()
-// 	logger.Debug("ORA SCRIVO IL FILE IN REMOTO")
-// 	err = session.Run("echo pippo >> prova.txt")
-// 	if err != nil {
-// 		logger.Debug("ERRORE NELLA SCRITTURA DEL FILE")
-// 		print(err.Error())
-// 	}
-// 	// print(err.Error())
-// 	// wg.Wait()
-
-// }
