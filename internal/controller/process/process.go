@@ -21,6 +21,8 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
@@ -32,12 +34,14 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/controller"
 	"github.com/crossplane/crossplane-runtime/pkg/event"
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
+	"github.com/crossplane/crossplane-runtime/pkg/meta"
 	"github.com/crossplane/crossplane-runtime/pkg/ratelimiter"
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 
 	"github.com/crossplane/provider-processprovider/apis/process/v1alpha1"
 	apisv1alpha1 "github.com/crossplane/provider-processprovider/apis/v1alpha1"
+	processservice "github.com/crossplane/provider-processprovider/internal/controller/processService"
 	"github.com/crossplane/provider-processprovider/internal/features"
 )
 
@@ -51,12 +55,19 @@ const (
 )
 
 // A ProcessService does nothing.
-type ProcessService struct {
-	Executed bool
-}
+
+// func (p *ProcessService) UpdateExecuted(condition bool) {
+// 	p.Executed = condition
+// }
+// func (p *ProcessService) GetExecuted() bool {
+// 	return p.Executed
+// }
 
 var (
-	newProcessService = func(_ []byte) (*ProcessService, error) { return &ProcessService{Executed: false}, nil }
+	newProcessService = func(_ []byte, processName string) (*processservice.ProcessService, error) {
+
+		return processservice.GetInstance(processName), nil
+	}
 )
 
 // Setup adds a controller that reconciles Process managed resources.
@@ -94,7 +105,7 @@ type connector struct {
 	logger       logging.Logger
 	kube         client.Client
 	usage        resource.Tracker
-	newServiceFn func(creds []byte) (*ProcessService, error)
+	newServiceFn func(creds []byte, processName string) (*processservice.ProcessService, error)
 }
 
 // Connect typically produces an ExternalClient by:
@@ -123,7 +134,7 @@ func (c *connector) Connect(ctx context.Context, mg resource.Managed) (managed.E
 		return nil, errors.Wrap(err, errGetCreds)
 	}
 
-	svc, err := c.newServiceFn(data)
+	svc, err := c.newServiceFn(data, mg.GetName())
 	if err != nil {
 		return nil, errors.Wrap(err, errNewClient)
 	}
@@ -137,7 +148,7 @@ type external struct {
 	// A 'client' used to connect to the external resource API. In practice this
 	// would be something like an AWS SDK client.
 	logger  logging.Logger
-	service *ProcessService
+	service *processservice.ProcessService
 }
 
 func (c *external) Observe(ctx context.Context, mg resource.Managed) (managed.ExternalObservation, error) {
@@ -146,15 +157,19 @@ func (c *external) Observe(ctx context.Context, mg resource.Managed) (managed.Ex
 		return managed.ExternalObservation{}, errors.New(errNotProcess)
 	}
 	cr.Status.SetConditions(v1.ReconcileSuccess())
+	cr.SetConditions(v1.Available())
 
 	// These fmt statements should be removed in the real implementation.
-	fmt.Printf("Observing: %+v", cr)
+	// fmt.Printf("Observing: %+v", cr)
+	// c.logger.Debug("SONO DENTRO A OBSERVE")
+	// c.logger.Debug(strconv.FormatBool(c.service.GetExecuted()))
+	// c.logger.Debug(strconv.FormatBool(c.service.Executed))
 
 	return managed.ExternalObservation{
 		// Return false when the external resource does not exist. This lets
 		// the managed resource reconciler know that it needs to call Create to
 		// (re)create the resource, or that it has successfully been deleted.
-		ResourceExists: c.service.Executed,
+		ResourceExists: c.service.GetExecuted(),
 
 		// Return false when the external resource exists, but it not up to date
 		// with the desired managed resource state. This lets the managed
@@ -172,12 +187,24 @@ func (c *external) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 	if !ok {
 		return managed.ExternalCreation{}, errors.New(errNotProcess)
 	}
+	var temp string
+	if *&cr.Spec.ForProvider.Service == nil {
+		temp = fmt.Sprintf("MAMMA STO CREANDO LA RISORSA %s, CHE HA COME NODEADDRESS %s", cr.Name, cr.Spec.ForProvider.NodeAddress)
+	} else {
+		temp = fmt.Sprintf("MAMMA STO CREANDO LA RISORSA %s, CHE HA COME NODEADDRESS %s e come RESOURCE TO DOWNLOAD %s", cr.Name, cr.Spec.ForProvider.NodeAddress, *cr.Spec.ForProvider.Service)
+	}
 
-	temp := fmt.Sprintf("MAMMA STO CREANDO LA RISORSA %s, CHE HA COME NODEADDRESS %s e come RESOURCE TO DOWNLOAD %s", cr.Name, cr.Spec.ForProvider.NodeAddress, *cr.Spec.ForProvider.Service)
 	c.logger.Debug(temp)
 	sendHTTPReq(cr.Spec.ForProvider.NodeAddress, cr.Spec.ForProvider.NodePort, cr.Spec.ForProvider.Service, c.logger)
-	c.service.Executed = true
+	// newCondition := true
+	c.service.UpdateExecuted(true)
+	c.logger.Debug(strconv.FormatBool(c.service.GetExecuted()))
+	c.logger.Debug(strconv.FormatBool(c.service.Executed))
 	cr.SetConditions(v1.Available())
+	mg.SetConditions(v1.Available())
+	mg.SetConditions(v1.ReconcileSuccess())
+
+	meta.SetExternalCreateSucceeded(mg, time.Now())
 	return managed.ExternalCreation{
 		// Optionally return any details that may be required to connect to the
 		// external resource. These will be stored as the connection secret.
@@ -205,6 +232,7 @@ func (c *external) Delete(ctx context.Context, mg resource.Managed) error {
 	if !ok {
 		return errors.New(errNotProcess)
 	}
+	processservice.DeleteProcessService(mg.GetName())
 
 	c.logger.Debug("CANCELLO LA RISORSA")
 
