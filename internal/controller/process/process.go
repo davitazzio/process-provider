@@ -153,11 +153,16 @@ func (c *external) Observe(ctx context.Context, mg resource.Managed) (managed.Ex
 	// c.logger.Debug(strconv.FormatBool(c.service.GetExecuted()))
 	// c.logger.Debug(strconv.FormatBool(c.service.Executed))
 
+	_, err := c.service.ObserveProcess(cr.Spec.ForProvider.NodeAddress, cr.Spec.ForProvider.NodePort, cr.Spec.ForProvider.RemoteUser, c.logger)
+	if err != nil {
+		c.logger.Debug("errore nell'osservazione del processo remoto")
+	}
+
 	return managed.ExternalObservation{
 		// Return false when the external resource does not exist. This lets
 		// the managed resource reconciler know that it needs to call Create to
 		// (re)create the resource, or that it has successfully been deleted.
-		ResourceExists: c.service.GetExecuted(),
+		ResourceExists: c.service.GetActive(),
 
 		// Return false when the external resource exists, but it not up to date
 		// with the desired managed resource state. This lets the managed
@@ -178,8 +183,13 @@ func (c *external) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 
 	c.logger.Debug(fmt.Sprintf("Creating resource %s with parameter 'node_address' %s.", cr.Name, cr.Spec.ForProvider.NodeAddress))
 
-	// an example of resource creatino connecting to an HTTP server
-	sendHTTPReq(cr.Spec.ForProvider.NodeAddress, cr.Spec.ForProvider.NodePort, cr.Spec.ForProvider.Service, c.logger)
+	_, err := c.service.StartProcess(cr.Spec.ForProvider.NodeAddress, cr.Spec.ForProvider.NodePort, cr.Spec.ForProvider.ProgramPath, cr.Spec.ForProvider.RemoteUser, c.logger)
+	if err != nil {
+		c.logger.Debug("errore nell'avvio del processo remoto")
+	}
+
+	// // an example of resource creatino connecting to an HTTP server
+	// sendHTTPReq(cr.Spec.ForProvider.NodeAddress, cr.Spec.ForProvider.NodePort, cr.Spec.ForProvider.Service, c.logger)
 
 	// newCondition := true
 	mg.SetConditions(v1.Available())
@@ -212,9 +222,11 @@ func (c *external) Delete(ctx context.Context, mg resource.Managed) error {
 	if !ok {
 		return errors.New(errNotProcess)
 	}
-	processservice.DeleteProcessService(mg.GetName())
 
-	c.logger.Debug(fmt.Sprintf("Deleting resource: %+v", cr))
+	err := c.service.TerminateProcess(cr.Spec.ForProvider.NodeAddress, cr.Spec.ForProvider.NodePort, cr.Spec.ForProvider.RemoteUser, c.logger)
+	if err != nil {
+		c.logger.Debug("errore nell'osservazione del processo remoto")
+	}
 
 	return nil
 }

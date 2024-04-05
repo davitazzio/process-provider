@@ -67,17 +67,21 @@ spec:
               forProvider:
                 description: ProcessParameters are the configurable fields of a Process.
                 properties:
-                  command:
-                    type: string
                   nodeAddress:
                     type: string
                   nodePort:
+                    type: string
+                  programPath:
+                    type: string
+                  remoteUser:
                     type: string
                   service:
                     type: string
                 required:
                 - nodeAddress
                 - nodePort
+                - programPath
+                - remoteUser
                 type: object
               managementPolicies:
                 default:

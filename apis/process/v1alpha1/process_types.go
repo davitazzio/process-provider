@@ -29,8 +29,8 @@ import (
 type ProcessParameters struct {
 	NodeAddress string `json:"nodeAddress"`
 	NodePort    string `json:"nodePort"`
-	// +optional
-	Command *string `json:"command"`
+	RemoteUser  string `json:"remoteUser"`
+	ProgramPath string `json:"programPath"`
 	// +optional
 	Service *string `json:"service"`
 }
