@@ -227,6 +227,8 @@ func (c *external) Delete(ctx context.Context, mg resource.Managed) error {
 	if err != nil {
 		c.logger.Debug("errore nell'osservazione del processo remoto")
 	}
+	// processservice.DeleteProcessService(c.service.ProcessName)
+	mg.SetConditions(v1.Deleting())
 
 	return nil
 }

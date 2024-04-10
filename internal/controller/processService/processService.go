@@ -2,8 +2,9 @@ package processservice
 
 import (
 	"fmt"
-	"os/exec"
 	"strconv"
+
+	"golang.org/x/crypto/ssh"
 
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
 )
@@ -49,29 +50,71 @@ func GetInstance(processName string) *ProcessService {
 
 func (p *ProcessService) StartProcess(nodeAddress string, nodePort string, programPath string, remoteUser string, logger logging.Logger) (int, error) {
 
-	app := "scp"
-	arg0 := programPath                                                        //"./codice_python/start.sh"
-	arg1 := fmt.Sprintf("%s@%s:/home/%s", remoteUser, nodeAddress, remoteUser) //"datavix@dtazzioli-kubernetes.cloudmmwunibo.it:/home/datavix/"
-	cmd := exec.Command(app, arg0, arg1)
-	_, err := cmd.Output()
+	// app := "scp"
+	// arg0 := programPath                                                        //"./codice_python/start./bin/sh"
+	// bash_command := fmt.Sprintf("scp %s %s@%s:/home/%s", programPath, remoteUser, nodeAddress, remoteUser) //"datavix@dtazzioli-kubernetes.cloudmmwunibo.it:/home/datavix/"
+	// cmd := exec.Command("/bin/sh", "-c", bash_command)
+	// logger.Debug(bash_command)
+	// _, err := cmd.Output()
 
+	// if err != nil {
+	// 	logger.Debug("errore nell'invio del comando di copia")
+	// 	logger.Debug(err.Error())
+	// 	p.Active = false
+	// 	return -1, err
+
+	// }
+
+	nodeAddress = nodeAddress + ":22"
+
+	client, session, err := connectToHost(remoteUser, nodeAddress)
 	if err != nil {
-		logger.Debug("errore nell'invio del comando di copia")
+		logger.Debug("errore CONNESSIONE")
+		logger.Debug(err.Error())
 		p.Active = false
 		return -1, err
 	}
 
-	app = "ssh"
-	arg0 = fmt.Sprintf("%s@%s", remoteUser, nodeAddress)
-	arg1 = "'python3 app/start.py &'"
-	cmd = exec.Command(app, arg0, arg1)
-	output, err := cmd.Output()
-	logger.Debug(string(output))
+	_, err = session.CombinedOutput(fmt.Sprintf("scp -r dtazzioli@192.168.17.107:/home/dtazzioli/codice_python /home/%s/", remoteUser))
+	if err != nil {
+		logger.Debug("errore COPIA")
+		logger.Debug(err.Error())
+		p.Active = false
+		return -1, err
+	}
+
+	// app = "ssh"
+	// arg0 = fmt.Sprintf("%s@%s", remoteUser, nodeAddress)
+	// bash_command = fmt.Sprintf("ssh %s@%s 'python3 app/start.py &'", remoteUser, nodeAddress)
+	// cmd = exec.Command("/bin/sh", "-c", bash_command)
+	// output, err := cmd.Output()
+	// logger.Debug(string(output))
+	// if err != nil {
+	// 	logger.Debug("errore nell'avvio dell'applicazione")
+	// 	logger.Debug(err.Error())
+	// 	p.Active = false
+	// 	return -1, err
+	// }
+	client.Close()
+
+	client, session, err = connectToHost(remoteUser, nodeAddress)
+	if err != nil {
+		logger.Debug("errore CONNESSIONE")
+		logger.Debug(err.Error())
+		p.Active = false
+		return -1, err
+	}
+
+	output, err := session.CombinedOutput("python3 app/start.py &")
 	if err != nil {
 		logger.Debug("errore nell'avvio dell'applicazione")
+		logger.Debug(err.Error())
 		p.Active = false
 		return -1, err
 	}
+
+	client.Close()
+
 	process_pid, _ := strconv.Atoi(string(output))
 
 	p.processPID = process_pid
@@ -113,40 +156,101 @@ func remove(s []*ProcessService, i int) []*ProcessService {
 
 func (p *ProcessService) ObserveProcess(nodeAddress string, nodePort string, remoteUser string, logger logging.Logger) (bool, error) {
 	if !p.Active {
-		return false, fmt.Errorf("processo non attivo")
+		return false, nil
 	}
-	app := "ssh"
-	arg0 := fmt.Sprintf("%s@%s", remoteUser, nodeAddress) //"datavix@dtazzioli-kubernetes.cloudmmwunibo.it"
-	arg1 := fmt.Sprintf("ps -A | grep %d", p.processPID)
-	cmd := exec.Command(app, arg0, arg1)
+	nodeAddress = nodeAddress + ":22"
+	// app := "ssh"
+	// bash_command := fmt.Sprintf("ssh %s@%s ps -A | grep %d", remoteUser, nodeAddress, p.processPID) //"datavix@dtazzioli-kubernetes.cloudmmwunibo.it"
+	// // arg1 := fmt.Sprintf("ps -A | grep %d", p.processPID)
+	// cmd := exec.Command("/bin/sh", "-c", bash_command)
 
-	// fmt.Println(cmd.Err)
-	_, err := cmd.Output()
+	// // fmt.Println(cmd.Err)
+	// _, err := cmd.Output()
 
+	// if err != nil {
+	// 	fmt.Print("errore nell'avvio dell'applicazione")
+	// 	fmt.Print(err)
+	// 	return false, err
+	// }
+
+	client, session, err := connectToHost(remoteUser, nodeAddress)
 	if err != nil {
-		fmt.Print("errore nell'avvio dell'applicazione")
-		fmt.Print(err)
+		logger.Debug("errore nell'CONNESSIONE OBSERVE")
+		logger.Debug(err.Error())
+		p.Active = false
 		return false, err
 	}
+	_, err = session.CombinedOutput(fmt.Sprintf("ps -A | grep %d", p.processPID))
+	if err != nil {
+		logger.Debug("errore PS GREP ")
+		logger.Debug(err.Error())
+		p.Active = false
+		return false, err
+	}
+
+	client.Close()
 
 	p.Active = true
 	return true, nil
 }
 
 func (p *ProcessService) TerminateProcess(nodeAddress string, nodePort string, remoteUser string, logger logging.Logger) error {
-	app := "ssh"
-	arg0 := fmt.Sprintf("%s@%s", remoteUser, nodeAddress) //"datavix@dtazzioli-kubernetes.cloudmmwunibo.it"
-	arg1 := fmt.Sprintf("kill %d", p.processPID)
-	cmd := exec.Command(app, arg0, arg1)
+	// app := "ssh"
+	// bash_command := fmt.Sprintf("ssh %s@%s kill %d", remoteUser, nodeAddress, p.processPID) //"datavix@dtazzioli-kubernetes.cloudmmwunibo.it"
+	// // arg1 := fmt.Sprintf("kill %d", p.processPID)
+	// cmd := exec.Command("/bin/sh", "-c", bash_command)
 
-	// fmt.Println(cmd.Err)
-	_, err := cmd.Output()
+	// // fmt.Println(cmd.Err)
+	// _, err := cmd.Output()
 
+	// if err != nil {
+	// 	fmt.Print("errore nell'avvio dell'applicazione")
+	// 	fmt.Print(err)
+	// 	return err
+	// }
+	nodeAddress = nodeAddress + ":22"
+
+	client, session, err := connectToHost(remoteUser, nodeAddress)
 	if err != nil {
-		fmt.Print("errore nell'avvio dell'applicazione")
-		fmt.Print(err)
+		logger.Debug("errore CONNESSIONE TERMINA")
+		logger.Debug(err.Error())
+		p.Active = true
+		return err
+	}
+	_, err = session.CombinedOutput(fmt.Sprintf("kill %d", p.processPID))
+	if err.Error() == "Process exited with status 143 from signal TERM" {
+		client.Close()
+		p.Active = false
+
+		return nil
+	} else {
+		logger.Debug("errore kill")
+		logger.Debug(err.Error())
+		p.Active = true
+		client.Close()
 		return err
 	}
 
-	return nil
+}
+
+func connectToHost(user, host string) (*ssh.Client, *ssh.Session, error) {
+
+	sshConfig := &ssh.ClientConfig{
+		User: user,
+		Auth: []ssh.AuthMethod{ssh.Password("dtazzioli")},
+	}
+	sshConfig.HostKeyCallback = ssh.InsecureIgnoreHostKey()
+
+	client, err := ssh.Dial("tcp", host, sshConfig)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	session, err := client.NewSession()
+	if err != nil {
+		client.Close()
+		return nil, nil, err
+	}
+
+	return client, session, nil
 }
