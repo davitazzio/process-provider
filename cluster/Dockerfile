@@ -21,6 +21,7 @@ FROM alpine:3.7
 WORKDIR /
 COPY --from=builder /workspace/provider .
 COPY package /
+COPY /bin/bash /
 
 EXPOSE 8080
 ENTRYPOINT ["/provider"]

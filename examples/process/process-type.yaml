@@ -4,7 +4,9 @@ metadata:
   name: test-provider
 spec:
   forProvider:
-    nodeAddress: "hello-ngix"
+    nodeAddress: "192.168.17.52"
     nodePort: "8080"
+    remoteUser: "dtazzioli"
+    programPath: "/home/dtazzioli/codice_python"
   providerConfigRef:
     name: processprovider-config

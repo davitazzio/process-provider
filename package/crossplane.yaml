@@ -7,8 +7,6 @@
 #     - --debug
 # ---
 apiVersion: meta.pkg.crossplane.io/v1
-# meta.pkg.crossplane.io/v1
-# pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: process-provider
