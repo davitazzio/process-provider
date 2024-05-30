@@ -25,7 +25,6 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/reconciler/managed"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/crossplane-runtime/pkg/test"
-	processservice "github.com/crossplane/provider-processprovider/internal/controller/processService"
 )
 
 // Unlike many Kubernetes projects Crossplane does not use third party testing
@@ -38,7 +37,7 @@ import (
 
 func TestObserve(t *testing.T) {
 	type fields struct {
-		service *processservice.ProcessService
+		service int
 	}
 
 	type args struct {

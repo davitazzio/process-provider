@@ -1,10 +1,10 @@
 apiVersion: process.processprovider.crossplane.io/v1alpha1
 kind: Process
 metadata:
-  name: test-provider
+  name: test-flprocess
 spec:
   forProvider:
-    nodeAddress: "hello-ngix"
-    nodePort: "8080"
+    # name: "prova"
+    nodeAddress: "dtazzioli-processprovider2.cloudmmwunibo.it"
   providerConfigRef:
     name: processprovider-config

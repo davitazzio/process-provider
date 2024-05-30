@@ -26,18 +26,16 @@ import (
 )
 
 // ProcessParameters are the configurable fields of a Process.
+
 type ProcessParameters struct {
+	// Name        string `json:"name"`
 	NodeAddress string `json:"nodeAddress"`
-	NodePort    string `json:"nodePort"`
-	// +optional
-	Command *string `json:"command"`
-	// +optional
-	Service *string `json:"service"`
 }
 
 // ProcessObservation are the observable fields of a Process.
 type ProcessObservation struct {
-	ObservableField string `json:"observableField,omitempty"`
+	Active     bool  `json:"active"`
+	ProcessPid int64 `json:"processPid"`
 }
 
 // A ProcessSpec defines the desired state of a Process.

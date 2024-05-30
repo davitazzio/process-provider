@@ -65,19 +65,12 @@ spec:
                 - Delete
                 type: string
               forProvider:
-                description: ProcessParameters are the configurable fields of a Process.
                 properties:
-                  command:
-                    type: string
                   nodeAddress:
-                    type: string
-                  nodePort:
-                    type: string
-                  service:
+                    description: Name        string `json:"name"`
                     type: string
                 required:
                 - nodeAddress
-                - nodePort
                 type: object
               managementPolicies:
                 default:
@@ -282,8 +275,14 @@ spec:
               atProvider:
                 description: ProcessObservation are the observable fields of a Process.
                 properties:
-                  observableField:
-                    type: string
+                  active:
+                    type: boolean
+                  processPid:
+                    format: int64
+                    type: integer
+                required:
+                - active
+                - processPid
                 type: object
               conditions:
                 description: Conditions of the resource.

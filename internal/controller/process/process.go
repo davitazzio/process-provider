@@ -19,9 +19,6 @@ package process
 import (
 	"context"
 	"fmt"
-	"io"
-	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/pkg/errors"
@@ -29,7 +26,6 @@ import (
 	ctrl "sigs.k8s.io/controller-runtime"
 	"sigs.k8s.io/controller-runtime/pkg/client"
 
-	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/connection"
 	"github.com/crossplane/crossplane-runtime/pkg/controller"
 	"github.com/crossplane/crossplane-runtime/pkg/event"
@@ -41,7 +37,6 @@ import (
 
 	"github.com/crossplane/provider-processprovider/apis/process/v1alpha1"
 	apisv1alpha1 "github.com/crossplane/provider-processprovider/apis/v1alpha1"
-	processservice "github.com/crossplane/provider-processprovider/internal/controller/processService"
 	"github.com/crossplane/provider-processprovider/internal/features"
 )
 
@@ -63,13 +58,6 @@ const (
 // 	return p.Executed
 // }
 
-var (
-	newProcessService = func(_ []byte, processName string) (*processservice.ProcessService, error) {
-
-		return processservice.GetInstance(processName), nil
-	}
-)
-
 // Setup adds a controller that reconciles Process managed resources.
 func Setup(mgr ctrl.Manager, o controller.Options) error {
 	name := managed.ControllerName(v1alpha1.ProcessGroupKind)
@@ -84,7 +72,7 @@ func Setup(mgr ctrl.Manager, o controller.Options) error {
 		managed.WithExternalConnecter(&connector{
 			kube:         mgr.GetClient(),
 			usage:        resource.NewProviderConfigUsageTracker(mgr.GetClient(), &apisv1alpha1.ProviderConfigUsage{}),
-			newServiceFn: newProcessService,
+			newServiceFn: -1,
 			logger:       o.Logger}),
 		managed.WithLogger(o.Logger.WithValues("controller", name)),
 		managed.WithPollInterval(o.PollInterval),
@@ -105,7 +93,7 @@ type connector struct {
 	logger       logging.Logger
 	kube         client.Client
 	usage        resource.Tracker
-	newServiceFn func(creds []byte, processName string) (*processservice.ProcessService, error)
+	newServiceFn int
 }
 
 // Connect typically produces an ExternalClient by:
@@ -129,17 +117,17 @@ func (c *connector) Connect(ctx context.Context, mg resource.Managed) (managed.E
 	}
 
 	cd := pc.Spec.Credentials
-	data, err := resource.CommonCredentialExtractor(ctx, cd.Source, c.kube, cd.CommonCredentialSelectors)
+	_, err := resource.CommonCredentialExtractor(ctx, cd.Source, c.kube, cd.CommonCredentialSelectors)
 	if err != nil {
 		return nil, errors.Wrap(err, errGetCreds)
 	}
 
-	svc, err := c.newServiceFn(data, mg.GetName())
-	if err != nil {
-		return nil, errors.Wrap(err, errNewClient)
-	}
+	// svc, err := c.newServiceFn(data, mg.GetName())
+	// if err != nil {
+	// 	return nil, errors.Wrap(err, errNewClient)
+	// }
 
-	return &external{service: svc, logger: c.logger}, nil
+	return &external{service: -1, logger: c.logger}, nil
 }
 
 // An ExternalClient observes, then either creates, updates, or deletes an
@@ -148,7 +136,7 @@ type external struct {
 	// A 'client' used to connect to the external resource API. In practice this
 	// would be something like an AWS SDK client.
 	logger  logging.Logger
-	service *processservice.ProcessService
+	service int
 }
 
 func (c *external) Observe(ctx context.Context, mg resource.Managed) (managed.ExternalObservation, error) {
@@ -156,20 +144,24 @@ func (c *external) Observe(ctx context.Context, mg resource.Managed) (managed.Ex
 	if !ok {
 		return managed.ExternalObservation{}, errors.New(errNotProcess)
 	}
-	cr.Status.SetConditions(v1.ReconcileSuccess())
-	cr.SetConditions(v1.Available())
 
-	// These fmt statements should be removed in the real implementation.
-	// fmt.Printf("Observing: %+v", cr)
-	// c.logger.Debug("SONO DENTRO A OBSERVE")
-	// c.logger.Debug(strconv.FormatBool(c.service.GetExecuted()))
-	// c.logger.Debug(strconv.FormatBool(c.service.Executed))
+	processPid, err := ObserveProcess(cr.Spec.ForProvider.NodeAddress, c.logger)
+
+	if err != nil {
+		c.logger.Debug("il processo non esiste e va creato")
+		cr.Status.AtProvider.Active = false
+		cr.Status.AtProvider.ProcessPid = -1
+	} else {
+		c.logger.Debug("il processo esiste")
+		cr.Status.AtProvider.Active = true
+		cr.Status.AtProvider.ProcessPid = processPid
+	}
 
 	return managed.ExternalObservation{
 		// Return false when the external resource does not exist. This lets
 		// the managed resource reconciler know that it needs to call Create to
 		// (re)create the resource, or that it has successfully been deleted.
-		ResourceExists: c.service.GetExecuted(),
+		ResourceExists: cr.Status.AtProvider.Active,
 
 		// Return false when the external resource exists, but it not up to date
 		// with the desired managed resource state. This lets the managed
@@ -187,22 +179,16 @@ func (c *external) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 	if !ok {
 		return managed.ExternalCreation{}, errors.New(errNotProcess)
 	}
-	var temp string
-	if *&cr.Spec.ForProvider.Service == nil {
-		temp = fmt.Sprintf("MAMMA STO CREANDO LA RISORSA %s, CHE HA COME NODEADDRESS %s", cr.Name, cr.Spec.ForProvider.NodeAddress)
-	} else {
-		temp = fmt.Sprintf("MAMMA STO CREANDO LA RISORSA %s, CHE HA COME NODEADDRESS %s e come RESOURCE TO DOWNLOAD %s", cr.Name, cr.Spec.ForProvider.NodeAddress, *cr.Spec.ForProvider.Service)
-	}
 
-	c.logger.Debug(temp)
-	sendHTTPReq(cr.Spec.ForProvider.NodeAddress, cr.Spec.ForProvider.NodePort, cr.Spec.ForProvider.Service, c.logger)
-	// newCondition := true
-	c.service.UpdateExecuted(true)
-	c.logger.Debug(strconv.FormatBool(c.service.GetExecuted()))
-	c.logger.Debug(strconv.FormatBool(c.service.Executed))
-	cr.SetConditions(v1.Available())
-	mg.SetConditions(v1.Available())
-	mg.SetConditions(v1.ReconcileSuccess())
+	err := CreateProcess(cr.Spec.ForProvider.NodeAddress, c.logger)
+	if err != nil {
+		c.logger.Debug("il processo non esiste e va creato")
+		cr.Status.AtProvider.Active = false
+		cr.Status.AtProvider.ProcessPid = -1
+	} else {
+		c.logger.Debug("il processo esiste")
+		cr.Status.AtProvider.Active = true
+	}
 
 	meta.SetExternalCreateSucceeded(mg, time.Now())
 	return managed.ExternalCreation{
@@ -228,41 +214,41 @@ func (c *external) Update(ctx context.Context, mg resource.Managed) (managed.Ext
 }
 
 func (c *external) Delete(ctx context.Context, mg resource.Managed) error {
-	_, ok := mg.(*v1alpha1.Process)
+	cr, ok := mg.(*v1alpha1.Process)
 	if !ok {
 		return errors.New(errNotProcess)
 	}
-	processservice.DeleteProcessService(mg.GetName())
+	KillProcess(cr.Spec.ForProvider.NodeAddress, c.logger)
 
 	c.logger.Debug("CANCELLO LA RISORSA")
 
 	return nil
 }
 
-func sendHTTPReq(nodeAddress string, nodePort string, service *string, logger logging.Logger) {
-	logger.Debug("Invio la richiesta a")
+// func sendHTTPReq(nodeAddress string, nodePort string, service *string, logger logging.Logger) {
+// 	logger.Debug("Invio la richiesta a")
 
-	address := "http://" + nodeAddress + ":" + nodePort + "/" + *service
+// 	address := "http://" + nodeAddress + ":" + nodePort + "/" + *service
 
-	logger.Debug(address)
-	resp, err := http.Get(address)
-	if err != nil {
-		logger.Debug("ERRORE NELLA RICHIESTA")
-		logger.Debug(err.Error())
-	}
-	defer func() {
-		err := resp.Body.Close()
-		if err != nil {
-			logger.Debug(err.Error())
-		}
-	}()
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		logger.Debug("Errore nella lettura del body")
-		logger.Debug(err.Error())
-	}
-	logger.Debug(string(body))
-}
+// 	logger.Debug(address)
+// 	resp, err := http.Get(address)
+// 	if err != nil {
+// 		logger.Debug("ERRORE NELLA RICHIESTA")
+// 		logger.Debug(err.Error())
+// 	}
+// 	defer func() {
+// 		err := resp.Body.Close()
+// 		if err != nil {
+// 			logger.Debug(err.Error())
+// 		}
+// 	}()
+// 	body, err := io.ReadAll(resp.Body)
+// 	if err != nil {
+// 		logger.Debug("Errore nella lettura del body")
+// 		logger.Debug(err.Error())
+// 	}
+// 	logger.Debug(string(body))
+// }
 
 // func connectSSH(hostAddress string, logger logging.Logger) {
 

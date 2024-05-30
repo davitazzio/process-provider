@@ -7,11 +7,10 @@
 #     - --debug
 # ---
 apiVersion: meta.pkg.crossplane.io/v1
-# meta.pkg.crossplane.io/v1
-# pkg.crossplane.io/v1
 kind: Provider
 metadata:
-  name: process-provider
+  name: flpprocess-provider
+  namespace: crossplane-system
   annotations:
     meta.crossplane.io/maintainer: Crossplane Maintainers <info@crossplane.io>
     meta.crossplane.io/source: github.com/crossplane/provider-template
@@ -20,7 +19,7 @@ metadata:
       A template that can be used to create Crossplane providers.
 spec:
   ignoreCrossplaneConstraints: true
-  package: docker.io/datavix/process-provider
+  package: docker.io/datavix/flprocess-provider
   packagePullPolicy: Always
   revisionActivationPolicy: Automatic
   revisionHistoryLimit: 0
