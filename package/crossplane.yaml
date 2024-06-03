@@ -6,7 +6,7 @@
 #   args:
 #     - --debug
 # ---
-apiVersion: meta.pkg.crossplane.io/v1
+apiVersion: meta.pkg.crossplane.io/v1 #pkg.crossplane.io/v1
 kind: Provider
 metadata:
   name: flpprocess-provider
@@ -23,5 +23,5 @@ spec:
   packagePullPolicy: Always
   revisionActivationPolicy: Automatic
   revisionHistoryLimit: 0
-  controllerConfigRef: 
+  controllerConfigRef:
     name: debug-config

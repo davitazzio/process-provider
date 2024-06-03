@@ -144,8 +144,8 @@ func (c *external) Observe(ctx context.Context, mg resource.Managed) (managed.Ex
 	if !ok {
 		return managed.ExternalObservation{}, errors.New(errNotProcess)
 	}
-
-	processPid, err := ObserveProcess(cr.Spec.ForProvider.NodeAddress, c.logger)
+	cr_specs := cr.Spec.ForProvider
+	processPid, err := ObserveProcess(cr_specs, c.logger)
 
 	if err != nil {
 		c.logger.Debug("il processo non esiste e va creato")
@@ -180,7 +180,7 @@ func (c *external) Create(ctx context.Context, mg resource.Managed) (managed.Ext
 		return managed.ExternalCreation{}, errors.New(errNotProcess)
 	}
 
-	err := CreateProcess(cr.Spec.ForProvider.NodeAddress, c.logger)
+	err := CreateProcess(cr.Spec.ForProvider, c.logger)
 	if err != nil {
 		c.logger.Debug("il processo non esiste e va creato")
 		cr.Status.AtProvider.Active = false
@@ -218,7 +218,7 @@ func (c *external) Delete(ctx context.Context, mg resource.Managed) error {
 	if !ok {
 		return errors.New(errNotProcess)
 	}
-	KillProcess(cr.Spec.ForProvider.NodeAddress, c.logger)
+	KillProcess(cr.Spec.ForProvider, c.logger)
 
 	c.logger.Debug("CANCELLO LA RISORSA")
 

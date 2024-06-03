@@ -2,16 +2,19 @@ package process
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/crossplane/crossplane-runtime/pkg/logging"
+	"github.com/crossplane/provider-processprovider/apis/process/v1alpha1"
 	"golang.org/x/crypto/ssh"
 )
 
-func ObserveProcess(nodeAddress string, logger logging.Logger) (int64, error) {
-	client, session, err := connectToHost("dtazzioli", nodeAddress)
+func ObserveProcess(cr_specs v1alpha1.ProcessParameters, logger logging.Logger) (int64, error) {
+	logger.Debug(fmt.Sprintf("Osservazione processo su %s", cr_specs.NodeAddress))
+	client, session, err := connectToHost(cr_specs, logger)
 	if err != nil {
-		logger.Debug("errore CONNESSIONE")
+		logger.Debug("errore CONNESSIONE observing")
 		logger.Debug(err.Error())
 		return -1, err
 	}
@@ -41,55 +44,39 @@ func ObserveProcess(nodeAddress string, logger logging.Logger) (int64, error) {
 	//	}
 }
 
-func CreateProcess(nodeAddress string, logger logging.Logger) error {
+func CreateProcess(cr_specs v1alpha1.ProcessParameters, logger logging.Logger) error {
 
-	client, session, err := connectToHost("dtazzioli", nodeAddress)
+	client, session, err := connectToHost(cr_specs, logger)
 	if err != nil {
-		logger.Debug("errore CONNESSIONE")
+		logger.Debug("errore CONNESSIONE creation")
 		logger.Debug(err.Error())
 		return err
 	}
-
-	command_str := "scp -r dtazzioli@dtazzioli-processprovider.cloudmmwunibo.it:/home/dtazzioli/process-provider/script.sh /home/dtazzioli"
-
-	// exec.Command("scp", "./script.sh", fmt.Sprintf("dtazzioli@%s:/home/dtazzioli", nodeAddress))
-	output, err := session.CombinedOutput(command_str)
+	defer client.Close()
+	//downloading code from gitlab on the remote machine running script.sh on the remote machine
+	file, err := os.Open("script.sh")
+	if err != nil {
+		fmt.Println("Error opening file: ", err)
+	}
+	defer file.Close()
+	//run remotely test.sh
+	session.Stdin = file
+	output, err := session.CombinedOutput("bash")
+	if err != nil {
+		fmt.Println("Error executing command: ", err)
+	}
 	logger.Debug(string(output))
-	if err != nil {
-		logger.Debug("errore copia")
-		logger.Debug(err.Error())
-		client.Close()
-		return err
-	}
-	client.Close()
-	client, session, err = connectToHost("dtazzioli", nodeAddress)
-	if err != nil {
-		logger.Debug("errore CONNESSIONE")
-		logger.Debug(err.Error())
-		return err
-	}
 
-	output, err = session.CombinedOutput("bash /home/dtazzioli/script.sh")
-	logger.Debug(string(output))
-	if err != nil {
-		logger.Debug("errore script")
-		logger.Debug(err.Error())
-		client.Close()
-		return err
-	}
-	client.Close()
 	return nil
-
 }
-func KillProcess(nodeAddress string, logger logging.Logger) (bool, error) {
+func KillProcess(cr_specs v1alpha1.ProcessParameters, logger logging.Logger) (bool, error) {
 
-	client, session, err := connectToHost("dtazzioli", nodeAddress)
+	client, session, err := connectToHost(cr_specs, logger)
 	if err != nil {
 		logger.Debug("errore CONNESSIONE")
 		logger.Debug(err.Error())
 		return false, err
 	}
-	defer client.Close()
 
 	output, err := session.CombinedOutput("pgrep -f mqttsub.py")
 	if err != nil {
@@ -99,17 +86,16 @@ func KillProcess(nodeAddress string, logger logging.Logger) (bool, error) {
 	}
 
 	process_pid, _ := strconv.ParseInt(string(output), 10, 64)
-
-	client, session, err = connectToHost("dtazzioli", nodeAddress)
+	client.Close()
+	client, session, err = connectToHost(cr_specs, logger)
 	if err != nil {
 		logger.Debug("errore CONNESSIONE")
 		logger.Debug(err.Error())
 		return false, err
 	}
-
+	defer client.Close()
 	output, err = session.CombinedOutput(fmt.Sprintf("kill %d", process_pid))
 	logger.Debug(string(output))
-	defer client.Close()
 	if err != nil {
 		logger.Debug("errore kill")
 		logger.Debug(err.Error())
@@ -119,15 +105,10 @@ func KillProcess(nodeAddress string, logger logging.Logger) (bool, error) {
 
 }
 
-func connectToHost(user, host string) (*ssh.Client, *ssh.Session, error) {
+func connectToHost(cr_specs v1alpha1.ProcessParameters, logger logging.Logger) (*ssh.Client, *ssh.Session, error) {
+	sshConfig := &ssh.ClientConfig{User: cr_specs.Username, Auth: []ssh.AuthMethod{ssh.Password(cr_specs.Password)}, HostKeyCallback: ssh.InsecureIgnoreHostKey()}
 
-	sshConfig := &ssh.ClientConfig{
-		User: user,
-		Auth: []ssh.AuthMethod{ssh.Password("dtazzioli")},
-	}
-	sshConfig.HostKeyCallback = ssh.InsecureIgnoreHostKey()
-
-	client, err := ssh.Dial("tcp", host+":22", sshConfig)
+	client, err := ssh.Dial("tcp", cr_specs.NodeAddress+":22", sshConfig)
 	if err != nil {
 		return nil, nil, err
 	}

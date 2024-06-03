@@ -14,4 +14,6 @@ python3 -m venv .venv
 source .venv/bin/activate
 pip3 install -r requirements.txt
 python3 mqttsub.py --port 3001 > /dev/null 2>&1 &
+
+echo "Federated Learning Process started"
 exit 0

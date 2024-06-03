@@ -5,6 +5,8 @@ metadata:
 spec:
   forProvider:
     # name: "prova"
-    nodeAddress: "dtazzioli-processprovider2.cloudmmwunibo.it"
+    nodeAddress: "nodeserf.cloudmmwunibo.it"
+    username: "lucaserf"
+    password: "lTLm#191"
   providerConfigRef:
     name: processprovider-config

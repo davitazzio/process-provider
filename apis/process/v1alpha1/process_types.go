@@ -30,6 +30,8 @@ import (
 type ProcessParameters struct {
 	// Name        string `json:"name"`
 	NodeAddress string `json:"nodeAddress"`
+	Username    string `json:"username"`
+	Password    string `json:"password"`
 }
 
 // ProcessObservation are the observable fields of a Process.
