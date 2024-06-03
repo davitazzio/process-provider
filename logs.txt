@@ -1,431 +1,104 @@
-2024-06-03T12:57:57Z	INFO	controller-runtime.metrics	Metrics server is starting to listen	{"addr": ":8080"}
-2024-06-03T12:57:57Z	INFO	starting server	{"path": "/metrics", "kind": "metrics", "addr": "[::]:8080"}
-2024-06-03T12:57:57Z	INFO	Starting EventSource	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "controllerGroup": "processprovider.crossplane.io", "controllerKind": "ProviderConfig", "source": "kind source: *v1alpha1.ProviderConfig"}
-2024-06-03T12:57:57Z	INFO	Starting EventSource	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "controllerGroup": "processprovider.crossplane.io", "controllerKind": "ProviderConfig", "source": "kind source: *v1alpha1.ProviderConfigUsage"}
-2024-06-03T12:57:57Z	INFO	Starting Controller	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "controllerGroup": "processprovider.crossplane.io", "controllerKind": "ProviderConfig"}
-2024-06-03T12:57:57Z	INFO	Starting EventSource	{"controller": "managed/process.process.processprovider.crossplane.io", "controllerGroup": "process.processprovider.crossplane.io", "controllerKind": "Process", "source": "kind source: *v1alpha1.Process"}
-2024-06-03T12:57:57Z	INFO	Starting Controller	{"controller": "managed/process.process.processprovider.crossplane.io", "controllerGroup": "process.processprovider.crossplane.io", "controllerKind": "Process"}
-2024-06-03T12:57:57Z	INFO	Starting workers	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "controllerGroup": "processprovider.crossplane.io", "controllerKind": "ProviderConfig", "worker count": 10}
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Reconciling	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "request": {"name":"processprovider-config"}}
-2024-06-03T12:57:57Z	INFO	Starting workers	{"controller": "managed/process.process.processprovider.crossplane.io", "controllerGroup": "process.processprovider.crossplane.io", "controllerKind": "Process", "worker count": 10}
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Reconciling	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "request": {"name":"processprovider-config"}}
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187420", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T12:57:57Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6187711"}, "reason": "CreatedExternalResource"}
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:57:57Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187711", "external-name": "test-flprocess"}
-2024-06-03T12:57:57Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6187711"}, "reason": "PendingExternalResource"}
-2024-06-03T12:57:58Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T12:57:58Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T12:57:58Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T12:57:58Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:57:58Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:57:58Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187711", "external-name": "test-flprocess"}
-2024-06-03T12:57:58Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6187711"}, "reason": "PendingExternalResource"}
-2024-06-03T12:58:02Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T12:58:02Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T12:58:03Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T12:58:03Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:58:03Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:58:03Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187711", "external-name": "test-flprocess"}
-2024-06-03T12:58:03Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6187711"}, "reason": "PendingExternalResource"}
-2024-06-03T12:58:11Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T12:58:11Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T12:58:11Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T12:58:11Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:58:11Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:58:11Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187711", "external-name": "test-flprocess"}
-2024-06-03T12:58:11Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6187711"}, "reason": "PendingExternalResource"}
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187711", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T12:58:27Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6187817"}, "reason": "CreatedExternalResource"}
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:58:27Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187817", "external-name": "test-flprocess"}
-2024-06-03T12:58:27Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6187817"}, "reason": "PendingExternalResource"}
-2024-06-03T12:58:59Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T12:58:59Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T12:58:59Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T12:58:59Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:58:59Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187817", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T12:59:00Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6187897"}, "reason": "CreatedExternalResource"}
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T12:59:00Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187897", "external-name": "test-flprocess"}
-2024-06-03T12:59:00Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6187897"}, "reason": "PendingExternalResource"}
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6187897", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:00:00Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188041"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:00:00Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188041", "external-name": "test-flprocess"}
-2024-06-03T13:00:00Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188041"}, "reason": "PendingExternalResource"}
-2024-06-03T13:01:00Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:01:00Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188041", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:01:01Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188218"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:01:01Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188218", "external-name": "test-flprocess"}
-2024-06-03T13:01:01Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188218"}, "reason": "PendingExternalResource"}
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188218", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:02:01Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188363"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:02:01Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:02:02Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:02:02Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:02:02Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:02:02Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188363", "external-name": "test-flprocess"}
-2024-06-03T13:02:02Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188363"}, "reason": "PendingExternalResource"}
-2024-06-03T13:03:01Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:03:01Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188363", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:03:02Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188506"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:03:02Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188506", "external-name": "test-flprocess"}
-2024-06-03T13:03:02Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188506"}, "reason": "PendingExternalResource"}
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188506", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:04:02Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188652"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:04:02Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:04:03Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:04:03Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:04:03Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:04:03Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188652", "external-name": "test-flprocess"}
-2024-06-03T13:04:03Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188652"}, "reason": "PendingExternalResource"}
-2024-06-03T13:05:02Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:05:02Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188652", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:05:03Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188796"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:05:03Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188796", "external-name": "test-flprocess"}
-2024-06-03T13:05:03Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188796"}, "reason": "PendingExternalResource"}
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188796", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:06:03Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188943"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:06:03Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:06:04Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:06:04Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:06:04Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:06:04Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188943", "external-name": "test-flprocess"}
-2024-06-03T13:06:04Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6188943"}, "reason": "PendingExternalResource"}
-2024-06-03T13:07:03Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:07:03Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6188943", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:07:04Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189092"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:07:04Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189092", "external-name": "test-flprocess"}
-2024-06-03T13:07:04Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189092"}, "reason": "PendingExternalResource"}
-2024-06-03T13:08:04Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:08:04Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:08:04Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:08:04Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:08:04Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189092", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:08:05Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189236"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:08:05Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189236", "external-name": "test-flprocess"}
-2024-06-03T13:08:05Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189236"}, "reason": "PendingExternalResource"}
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189236", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:09:05Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189381"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:09:05Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189381", "external-name": "test-flprocess"}
-2024-06-03T13:09:05Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189381"}, "reason": "PendingExternalResource"}
-2024-06-03T13:10:05Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:10:05Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189381", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:10:06Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189525"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:10:06Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189525", "external-name": "test-flprocess"}
-2024-06-03T13:10:06Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189525"}, "reason": "PendingExternalResource"}
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189525", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:11:06Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189668"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:11:06Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:11:07Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:11:07Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:11:07Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:11:07Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189668", "external-name": "test-flprocess"}
-2024-06-03T13:11:07Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189668"}, "reason": "PendingExternalResource"}
-2024-06-03T13:12:06Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:12:06Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189668", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:12:07Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189814"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:12:07Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189814", "external-name": "test-flprocess"}
-2024-06-03T13:12:07Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189814"}, "reason": "PendingExternalResource"}
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189814", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:13:07Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189956"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:13:07Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189956", "external-name": "test-flprocess"}
-2024-06-03T13:13:07Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6189956"}, "reason": "PendingExternalResource"}
-2024-06-03T13:14:07Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:14:07Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6189956", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:14:08Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6190100"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:14:08Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6190100", "external-name": "test-flprocess"}
-2024-06-03T13:14:08Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6190100"}, "reason": "PendingExternalResource"}
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6190100", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:15:08Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6190242"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:15:08Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6190242", "external-name": "test-flprocess"}
-2024-06-03T13:15:08Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6190242"}, "reason": "PendingExternalResource"}
-2024-06-03T13:16:08Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:16:08Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6190242", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:16:09Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6190386"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:16:09Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6190386", "external-name": "test-flprocess"}
-2024-06-03T13:16:09Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6190386"}, "reason": "PendingExternalResource"}
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	Host key verification failed.
-
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	errore copia
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6190386", "external-name": "test-flprocess", "external-name": "test-flprocess"}
-2024-06-03T13:17:09Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6190529"}, "reason": "CreatedExternalResource"}
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
-2024-06-03T13:17:09Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
-2024-06-03T13:17:10Z	DEBUG	provider-processprovider	errore grep
-2024-06-03T13:17:10Z	DEBUG	provider-processprovider	Process exited with status 1
-2024-06-03T13:17:10Z	DEBUG	provider-processprovider	il processo non esiste e va creato
-2024-06-03T13:17:10Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6190529", "external-name": "test-flprocess"}
-2024-06-03T13:17:10Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6190529"}, "reason": "PendingExternalResource"}
+2024-06-03T17:30:44Z	INFO	controller-runtime.metrics	Metrics server is starting to listen	{"addr": ":8080"}
+2024-06-03T17:30:44Z	INFO	starting server	{"path": "/metrics", "kind": "metrics", "addr": "[::]:8080"}
+2024-06-03T17:30:44Z	INFO	Starting EventSource	{"controller": "managed/process.process.processprovider.crossplane.io", "controllerGroup": "process.processprovider.crossplane.io", "controllerKind": "Process", "source": "kind source: *v1alpha1.Process"}
+2024-06-03T17:30:44Z	INFO	Starting Controller	{"controller": "managed/process.process.processprovider.crossplane.io", "controllerGroup": "process.processprovider.crossplane.io", "controllerKind": "Process"}
+2024-06-03T17:30:44Z	INFO	Starting EventSource	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "controllerGroup": "processprovider.crossplane.io", "controllerKind": "ProviderConfig", "source": "kind source: *v1alpha1.ProviderConfig"}
+2024-06-03T17:30:44Z	INFO	Starting EventSource	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "controllerGroup": "processprovider.crossplane.io", "controllerKind": "ProviderConfig", "source": "kind source: *v1alpha1.ProviderConfigUsage"}
+2024-06-03T17:30:44Z	INFO	Starting Controller	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "controllerGroup": "processprovider.crossplane.io", "controllerKind": "ProviderConfig"}
+2024-06-03T17:30:45Z	INFO	Starting workers	{"controller": "managed/process.process.processprovider.crossplane.io", "controllerGroup": "process.processprovider.crossplane.io", "controllerKind": "Process", "worker count": 10}
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:30:45Z	INFO	Starting workers	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "controllerGroup": "processprovider.crossplane.io", "controllerKind": "ProviderConfig", "worker count": 10}
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Reconciling	{"controller": "providerconfig/providerconfig.processprovider.crossplane.io", "request": {"name":"processprovider-config"}}
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:30:45Z	INFO	KubeAPIWarningLogger	unknown field "spec.forProvider.password"
+2024-06-03T17:30:45Z	INFO	KubeAPIWarningLogger	unknown field "spec.forProvider.username"
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	errore CONNESSIONE creation
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6226753", "external-name": "test-flprocess", "external-name": "test-flprocess"}
+2024-06-03T17:30:45Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227004"}, "reason": "CreatedExternalResource"}
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:30:45Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6227004", "external-name": "test-flprocess"}
+2024-06-03T17:30:45Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227004"}, "reason": "PendingExternalResource"}
+2024-06-03T17:30:46Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:30:46Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:30:46Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:30:46Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:30:46Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:30:46Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:30:46Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6227004", "external-name": "test-flprocess"}
+2024-06-03T17:30:46Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227004"}, "reason": "PendingExternalResource"}
+2024-06-03T17:30:50Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:30:50Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:30:50Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:30:50Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:30:50Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:30:50Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:30:50Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6227004", "external-name": "test-flprocess"}
+2024-06-03T17:30:50Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227004"}, "reason": "PendingExternalResource"}
+2024-06-03T17:30:58Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:30:58Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:30:58Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:30:58Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:30:58Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:30:58Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:30:58Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6227004", "external-name": "test-flprocess"}
+2024-06-03T17:30:58Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227004"}, "reason": "PendingExternalResource"}
+2024-06-03T17:31:14Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:31:14Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:31:14Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:31:14Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:31:14Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:31:14Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:31:14Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6227004", "external-name": "test-flprocess"}
+2024-06-03T17:31:14Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227004"}, "reason": "PendingExternalResource"}
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	errore CONNESSIONE creation
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6227004", "external-name": "test-flprocess", "external-name": "test-flprocess"}
+2024-06-03T17:31:46Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227157"}, "reason": "CreatedExternalResource"}
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:31:46Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6227157", "external-name": "test-flprocess"}
+2024-06-03T17:31:46Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227157"}, "reason": "PendingExternalResource"}
+2024-06-03T17:32:46Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:32:46Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:32:46Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	errore CONNESSIONE creation
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	Successfully requested creation of external resource	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6227157", "external-name": "test-flprocess", "external-name": "test-flprocess"}
+2024-06-03T17:32:47Z	DEBUG	events	Successfully requested creation of external resource	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227301"}, "reason": "CreatedExternalResource"}
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	Reconciling	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}}
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	Osservazione processo su nodeserf.cloudmmwunibo.it
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	Connessione a nodeserf.cloudmmwunibo.it, username , password 
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	errore CONNESSIONE observing
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	ssh: handshake failed: ssh: unable to authenticate, attempted methods [none password], no supported methods remain
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	il processo non esiste e va creato
+2024-06-03T17:32:47Z	DEBUG	provider-processprovider	Waiting for external resource existence to be confirmed	{"controller": "managed/process.process.processprovider.crossplane.io", "request": {"name":"test-flprocess"}, "uid": "1163e7ca-c362-4fe2-a943-5b408edb777c", "version": "6227301", "external-name": "test-flprocess"}
+2024-06-03T17:32:47Z	DEBUG	events	Waiting for external resource existence to be confirmed	{"type": "Normal", "object": {"kind":"Process","name":"test-flprocess","uid":"1163e7ca-c362-4fe2-a943-5b408edb777c","apiVersion":"process.processprovider.crossplane.io/v1alpha1","resourceVersion":"6227301"}, "reason": "PendingExternalResource"}

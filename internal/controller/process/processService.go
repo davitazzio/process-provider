@@ -106,6 +106,7 @@ func KillProcess(cr_specs v1alpha1.ProcessParameters, logger logging.Logger) (bo
 }
 
 func connectToHost(cr_specs v1alpha1.ProcessParameters, logger logging.Logger) (*ssh.Client, *ssh.Session, error) {
+	logger.Debug(fmt.Sprintf("Connessione a %s, username %s, password %s", cr_specs.NodeAddress, cr_specs.Username, cr_specs.Password))
 	sshConfig := &ssh.ClientConfig{User: cr_specs.Username, Auth: []ssh.AuthMethod{ssh.Password(cr_specs.Password)}, HostKeyCallback: ssh.InsecureIgnoreHostKey()}
 
 	client, err := ssh.Dial("tcp", cr_specs.NodeAddress+":22", sshConfig)
