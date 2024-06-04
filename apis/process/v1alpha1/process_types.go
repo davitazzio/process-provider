@@ -29,15 +29,25 @@ import (
 
 type ProcessParameters struct {
 	// Name        string `json:"name"`
-	NodeAddress string `json:"nodeAddress"`
+	NodeAddress string `json:"node_address"`
 	Username    string `json:"username"`
 	Password    string `json:"password"`
+	// Epochs           int64   `json:"epochs"`
+	// BatchSize        int64   `json:"batch_size"`
+	// LearningRate     float64 `json:"learning_rate"`
+	// FreqUpdateServer int64   `json:"freq_update_server"`
+	// TopicName        string  `json:"topic_name"`
+	// BrokerAddress    string  `json:"broker_address"`
+	// ServerAddress    string  `json:"server_address"`
 }
 
 // ProcessObservation are the observable fields of a Process.
 type ProcessObservation struct {
 	Active     bool  `json:"active"`
-	ProcessPid int64 `json:"processPid"`
+	ProcessPid int64 `json:"process_pid"`
+	// TrainingTime  float64 `json:"training_time"`
+	// InferenceTime float64 `json:"inference_time"`
+	// TrainingLoss  float64 `json:"training_loss"`
 }
 
 // A ProcessSpec defines the desired state of a Process.

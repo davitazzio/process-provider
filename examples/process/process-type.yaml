@@ -8,5 +8,6 @@ spec:
     nodeAddress: "nodeserf.cloudmmwunibo.it"
     username: "lucaserf"
     password: "lTLm#191"
+  # baremetal:
   providerConfigRef:
     name: processprovider-config
