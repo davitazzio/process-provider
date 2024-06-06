@@ -1,4 +1,4 @@
-wget https://www.emqx.com/en/downloads/broker/5.7.0/emqx-5.7.0-ubuntu24.04-amd64.tar.gz
+wget https://www.emqx.com/en/downloads/broker/5.7.0/emqx-5.7.0-ubuntu22.04-amd64.tar.gz
 mkdir -p emqx && tar -zxvf emqx-5.7.0-ubuntu24.04-amd64.tar.gz -C emqx
 ehco '
 api_key = {
